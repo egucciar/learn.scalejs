@@ -5,7 +5,7 @@
 *	21 May 2014
 */
 var fs = require('fs'),
-    exclude = ['README.txt', 'packages.config', 'learn.scalejs.csproj.user', 'learn.scalejs.csproj', 'index.test.html', 'Scripts', 'Properties', 'extensions', 'docs', 'css', 'test', 'config.js', 'index.html', 'js', 'node_modules', 'obj', 'packages', 'jqueryFileTree.js', 'learn.scalejs.sln', 'learn.scalejs.v12.suo', 'LICENSE', 'README.md', 'server.js','.git','.nuget','.scalejs','package.json'];
+    exclude = ['README.txt', 'packages.config', 'learn.scalejs.csproj.user', 'learn.scalejs.csproj', 'index.test.html', 'Scripts', 'Properties', 'extensions', 'docs', 'css', 'test', 'config.js', 'index.html', 'js', 'node_modules', 'obj', 'packages', 'jqueryFileTree.js', 'learn.scalejs.sln', 'learn.scalejs.v12.suo', 'LICENSE', 'README.md', 'server.js','.git','.nuget','.scalejs','package.json','autoconfig.js','runsdvui.cmd'];
 
 
 var _getDirList = function (request, response) {
