@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>scalejs.styles-less</id>
+    <version>0.1.0</version>
+    <title>scalejs.style-less</title>
+    <authors>Peter Lisovin</authors>
+    <owners>Peter Lisovin</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Add LESS stylesheet support to scalable JavaScript application (wrapper of Guy Bedford's requirejs less plugin).</description>
+  </metadata>
+</package>
