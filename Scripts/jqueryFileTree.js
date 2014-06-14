@@ -78,7 +78,7 @@ if(jQuery) (function($){
 
 								if (!o.multiFolder) {
 								    $(this).parent().parent().find('UL').slideUp({ duration: o.collapseSpeed, easing: o.collapseEasing });
-								   // $(this).parent().parent().find('LI.directory').removeClass('expanded').addClass('collapsed');
+								    $(this).parent().parent().find('LI.directory').removeClass('expanded').addClass('collapsed');
 								}
 
 								h($(this).attr('rel'), $(this).text());

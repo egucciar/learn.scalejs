@@ -40,8 +40,6 @@ app.get('/:module', function (req, res) {
     walk('./app/' + module, function (err, results) {
         var files = [];
 
-        console.log(results);
-
         async.eachSeries(results,
             function (file, cb) {
                 var filePath = file.split("/"),
