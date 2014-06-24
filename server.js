@@ -40,6 +40,8 @@ app.get('/:module', function (req, res) {
     walk('./app/' + module, function (err, results) {
         var files = [];
 
+        if (!results) return;
+
         async.eachSeries(results,
             function (file, cb) {
                 var filePath = file.split("/"),
@@ -47,7 +49,7 @@ app.get('/:module', function (req, res) {
                 fs.readFile(file, { encoding: 'utf8' }, function (err, content) {
                     if (!err) {
                         files.push({
-                            header: fileName, content: content.slice(1, content.length - 1)
+                            header: fileName, content: content.slice(1, content.length)
                         });
                     }
                     cb(err);

@@ -9,5 +9,71 @@
 </div>
 
 <div id="main_template">
-    Welcome to learn.scalejs
+    Welcome to learn.scalejs!
+
+    <br /><br />
+
+    This application demonstrates how to use various features of scalejs and its extensions.
+    It also demonstrates how to build a modular, scalable application.
+
+    <br /><br />
+
+    You are currently viewing the "main" module. The main module, however, does more than simply show this template for you to see.
+    The main module also sets up the application's statechart, layout, and regions.
+
+    <br /><br />
+
+    <strong>scalejs.statechart-scion</strong> sets up a "root" state for you to utilize in your application.
+    In this app, we created a "app" state to be the child of the "root" state.
+    Since it is the first and only child of the "root" state, the "app" state is immediately entered.
+
+    <br /><br />
+
+    The "app" state special because it is a <em>parallel</em> state.
+    This means that all children of the "app" state will be entered simultaneously.
+    The "app" state is also very important because it sets up the <em>layout</em>
+    and creates the <em>regions</em> in the layout. The "app" state must do this before any of its children
+    states are entered, because the children states will try to render views into the regions. 
+    
+    <br /><br />
+
+    The "app" state sets up the layout by utilizing the <strong>scalejs.layout-css</strong> extension
+    to parse grid styles and "invalidate" the layout. Grid Layout Styles are created in the main.less file.
+    <code>parseGridStyles</code> is a function which takes a callback, and this callback will be evaluated
+    after all grid styles have been parsed. Then, the module uses the <code>gridTemplate</code> function
+    to render a template/view and passes it a viewModel. The <code>gridTemplate</code> function will
+    return a renderable observable, which is then passed to the <code>root</code> function.
+    The <code>root</code> function the root region of the application. Any template passed here will
+    be rendered in the body of the HTML document. <code>gridTemplate</code> also invalidates after
+    the template is rendered. There is also a <code>template</code> function which can be used to render a template,
+    but does not call invalidate so that grids are layed out properly.
+
+    <br /><br />
+
+    The mainViewModel exposes 2 regions which can be accessed by other modules in the app: the code region and the module region.
+    In order for these regions to be accessible by other modules, they must be added to the statechart by adding them to <code>this</code>.
+    For those unfamilular with JavaScript, <code>this</code> is the context of the function. Within all functions of the statechart,
+    <code>this</code> refers to the statechart properties. Therefore, by adding properties to <code>this</code>, you are adding them to the statechart.
+
+    <br /><br />
+
+    After the "app" state is entered, all children states are entered, as well. The main module creates a "main" state. 
+    Unlike a parallel state, this state can only be in one child at a time. The reason we create the "main" state is because for every module,
+    we only want <em>one</em> module to display its template in the module region at any time. the "main.module" state is the first child
+    defined on the "main" state, so it is entered first, which is why you see the "main" module when you load the application.
+    
+    <br /><br />
+
+    All other modules will create states on the "main" state so that when the state is entered, it will render its template in the "module" region (as main is doing).
+    The "main" module also registers a transition on the main state which listens for an event. The event, "open.module" has some additional data passed to it.
+    This data indicates that a new module has been clicked and therefore, only if the "main" module is clicked, should the "main.module" state be entered.
+    Other modules follow a similar pattern. The mainViewModel contains the logic for selecting modules.
+
+    <br /><br />
+
+    One more thing which should be noted is <em>why</em> the app state is a parallel state. This is because we also want to be able to display the code for each module, 
+    regardless of which module we are viewing. The code module then sets up a state on the "app" state which loads the code template into the code region. 
+    The "code" module also listens for the "open.module" event and loads the module's code in its ViewModel. The code module does not know anything about specific modules,
+    and modules do not know (or care) about the existance of the code module. This maintains loose coupling throughout the app....which was done intentionally. :)
+
 </div>

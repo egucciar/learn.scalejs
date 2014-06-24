@@ -30,8 +30,7 @@ define([
         registerStates('app',
             state('code',
                 onEntry(function () {
-                    // Render viewModel using 'main_template' template 
-                    // (defined in main.html) and show it in the `root` region.
+                    // Render and layout the code_template in the code module
                     this.code(gridTemplate('code_template', code));
                 }),
                 on('open.module', gotoInternally('load.module')),
@@ -41,15 +40,17 @@ define([
                         code.load(module);
                     }))));
 
+        // Register state on the main module
         registerStates('main',
             state('code.module',
                 onEntry(function () {
-                    this.module(template('code_module_template', code))
+                    this.module(template('code_module_template', code));
                 })));
 
+        // Register self-opening transition
         registerTransition('main', on('open.module',
            function (e) {
-               return e.data.module === 'code'
+               return e.data.module === 'code';
            }, gotoInternally('code.module')));
     };
 });

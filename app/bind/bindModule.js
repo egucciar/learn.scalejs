@@ -24,19 +24,20 @@ define([
             // vars
             bind = bindViewModel(sandbox);
 
-        // Register application state for the module.
+        // Register main state for the module.
         registerStates('main',
             state('bind',
                 onEntry(function () {
-                    // Render viewModel using 'main_template' template 
-                    // (defined in main.html) and show it in the `root` region.
                     bind.text('Hello World from bind!');
+
+                    // render the bind_template in the module region
                     this.module(template("bind_template", bind));
                 })));
 
+        // Register self-opening transition
         registerTransition('main', on('open.module',
             function(e) {
-                return e.data.module === 'bind' 
+                return e.data.module === 'bind';
             }, gotoInternally('bind')));
     };
 });

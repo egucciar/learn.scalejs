@@ -10,6 +10,7 @@ define([
         var observable = sandbox.mvvm.observable,
             text = observable();
 
+
         return {
             text: text
         };
