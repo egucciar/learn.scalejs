@@ -58,6 +58,7 @@
     <Content Include="extensions\scalejs.editor-ace.js" />
     <Content Include="css\images\iconClose.png" />
     <Content Include="css\images\iconMore.png" />
+    <Content Include="extensions\scalejs.formatters.js" />
     <Content Include="index.html" />
     <Content Include="index.test.html" />
     <Content Include="Scripts\ace\ace.js" />
@@ -419,7 +420,6 @@
     <Content Include="app\main\views\main.html" />
     <Content Include="app\main\mainModule.js" />
     <Content Include="Scripts\_scalejs.intellisense.js" />
-    <Content Include="server.js" />
     <Content Include="test\all.tests.js" />
     <Content Include="test\mainViewModel.test.js" />
     <Content Include="config.js" />
@@ -430,6 +430,7 @@
     <None Include="app\bind\styles\bind.less" />
     <None Include="app\code\styles\code.less" />
     <Content Include="extensions\scalejs.filetree-jquery.js" />
+    <None Include="JSLintNet.json" />
     <None Include="packages.config" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
   </ItemGroup>

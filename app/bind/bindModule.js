@@ -13,7 +13,6 @@ define([
 
     return function bindModule() {
         var // imports
-            root = sandbox.mvvm.root,
             template = sandbox.mvvm.template,
             registerStates = sandbox.state.registerStates,
             registerTransition = sandbox.state.registerTransition,
@@ -28,14 +27,13 @@ define([
         registerStates('main',
             state('bind',
                 onEntry(function () {
-                   
                     // render the bind_template in the module region
                     this.module(template("bind_template", bind));
                 })));
 
         // Register self-opening transition
         registerTransition('main', on('open.module',
-            function(e) {
+            function (e) {
                 return e.data.module === 'bind';
             }, gotoInternally('bind')));
     };

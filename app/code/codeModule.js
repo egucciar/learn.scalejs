@@ -21,7 +21,6 @@ define([
             onEntry = sandbox.state.builder.onEntry,
             on = sandbox.state.builder.on,
             gotoInternally = sandbox.state.builder.gotoInternally,
-            goto = sandbox.state.builder.goto,
             has = sandbox.object.has,
             // vars
             code = codeViewModel(sandbox);
@@ -49,8 +48,8 @@ define([
 
         // Register self-opening transition
         registerTransition('main', on('open.module',
-           function (e) {
-               return e.data.module === 'code';
-           }, gotoInternally('code.module')));
+            function (e) {
+                return e.data.module === 'code';
+            }, gotoInternally('code.module')));
     };
 });

@@ -1,0 +1,14 @@
+﻿{
+  "ignore": [
+    "\\Scripts\\",
+    "\\server.js",
+    "\\extensions\\"
+  ],
+  "options": {
+    "predef": {},
+    "passfail": false,
+    "regexp": true
+  },
+  "runOnSave": true,
+  "cancelBuild": false
+}

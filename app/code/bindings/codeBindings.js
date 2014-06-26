@@ -1,7 +1,7 @@
 ﻿/*global define */
 /*jslint sloppy: true*/
 define({
-    'code-editor': function (ctx) {
+    'code-editor': function () {
         return {
             editor: {
                 text: this.text,

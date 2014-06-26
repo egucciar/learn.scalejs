@@ -1,6 +1,6 @@
 ﻿/*global define */
 define([
-    'sandbox!code',
+    'sandbox!code'
 ], function (
     sandbox
 ) {
@@ -36,18 +36,16 @@ define([
             };
         }
 
-        function load(module) {            
+        function load(module) {
             ajaxGet(module).subscribe(function (files) {
-                console.log("hello");
                 allFiles = files.map(createTab);
                 tabs(copy(allFiles));
                 var sorted = ['Module', 'ViewModel', 'Bindings', 'html', 'less']
-                    .map(function(filetype) {
+                    .map(function (filetype) {
                         return tabs.remove(function (tab) {
                             return tab.header.indexOf(filetype) > 0;
-                        })[0]
+                        })[0];
                     });
-                
                 tabs(sorted);
                 active(0);
             });
