@@ -1,8 +1,7 @@
 ﻿{
   "ignore": [
     "\\Scripts\\",
-    "\\server.js",
-    "\\extensions\\"
+    "\\server.js"
   ],
   "options": {
     "predef": {},
