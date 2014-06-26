@@ -1,22 +1,21 @@
 ﻿/*global define*/
 define([
-	'scalejs!core',
+    'scalejs!core',
     'knockout',
     'ace'
 ], function (
-	core,
+    core,
     ko,
     ace
 ) {
+    'use strict';
+
     ace.config.set("basePath", "Scripts/ace");
 
     function init(
-		element,
-		valueAccessor,
-		allBindingsAccessor,
-		viewModel,
-		bindingContext
-	) {
+        element,
+        valueAccessor
+    ) {
         var value = valueAccessor(),
             editorMode = value.editorMode || 'html',
             text = value.text,
@@ -27,7 +26,7 @@ define([
             disposeLayout;
 
         if (editorMode === 'js') {
-            editorMode = 'javascript'
+            editorMode = 'javascript';
         }
 
         session.setUseWrapMode(false);
@@ -39,7 +38,7 @@ define([
         ko.computed({
             read: function () {
                 if (val !== ko.unwrap(text)) {
-                    editor.setValue(text(),-1);
+                    editor.setValue(text(), -1);
                 }
             },
             disposeWhenNodeIsRemoved: element
@@ -55,7 +54,9 @@ define([
         if (ko.isObservable(text)) {
             session.on('change', function () {
                 val = editor.getValue();
-                if (text() !== val) text(val);
+                if (text() !== val) {
+                    text(val);
+                }
             });
         }
 
