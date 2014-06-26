@@ -1,9 +1,10 @@
 ﻿/*global define */
 /*jslint sloppy: true*/
 define({
-    'bind-text': function () {
+    'bind-text': function() {
         return {
-            text: this.text
+            text: "Hello, " + this.username()
         };
     }
+    
 });

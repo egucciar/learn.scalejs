@@ -1,7 +1,11 @@
 ﻿<div id="bind_template">
-    <span class="bind text" data-class="bind-text"></span>
+    <div class="bind text" data-class="bind-text"></div>
+    <div data-bind="foreach: items" >
+        <div data-bind="text: $data"></div>
+    </div>
+    <input data-bind="value: username, valueUpdate: 'afterkeydown'"  />
+    <button data-bind="click: submit">submit</button>
 </div>
-
 
 <div id="bind_summary_template">
     In bind we will go over different bindings knockout exposes, 

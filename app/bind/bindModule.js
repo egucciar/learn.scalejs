@@ -28,8 +28,7 @@ define([
         registerStates('main',
             state('bind',
                 onEntry(function () {
-                    bind.text('Hello World from bind!');
-
+                   
                     // render the bind_template in the module region
                     this.module(template("bind_template", bind));
                 })));

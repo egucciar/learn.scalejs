@@ -1,6 +1,6 @@
-﻿/*global define */
+﻿/*global define,alert */
 define([
-    'sandbox!bind',
+    'sandbox!bind'
 ], function (
     sandbox
 ) {
@@ -8,11 +8,18 @@ define([
 
     return function () {
         var observable = sandbox.mvvm.observable,
-            text = observable();
-
+            observableArray = sandbox.mvvm.observableArray,
+            items = observableArray(),
+            username = observable("");
+    
+        function submit() {
+            items.push(username());
+        }
 
         return {
-            text: text
+            username: username,
+            items: items,
+            submit: submit
         };
     };
 });
