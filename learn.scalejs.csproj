@@ -58,7 +58,7 @@
     <Content Include="extensions\scalejs.editor-ace.js" />
     <Content Include="css\images\iconClose.png" />
     <Content Include="css\images\iconMore.png" />
-    <Content Include="extensions\scalejs.formatters.js" />
+    <Content Include="extensions\scalejs.formatter.js" />
     <Content Include="index.html" />
     <Content Include="index.test.html" />
     <Content Include="Scripts\ace\ace.js" />

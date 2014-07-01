@@ -28,7 +28,9 @@ define([
             state('bind',
                 onEntry(function () {
                     // render the bind_template in the module region
-                    this.module(template("bind_template", bind));
+                    //this.module(template("bind_template", bind));
+                    //this.module(template("bind_summary_template", bind));
+                    this.module(template("bind_layout_template", bind));
                 })));
 
         // Register self-opening transition
