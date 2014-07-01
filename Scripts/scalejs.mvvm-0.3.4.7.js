@@ -1,4 +1,3 @@
-
 // knockout-classBindingProvider 0.5.0 | (c) 2013 Ryan Niemeyer |  http://www.opensource.org/licenses/mit-license
 ;(function (factory) {
     //AMD
@@ -202,7 +201,7 @@
 
     return classBindingsProvider;
 }));
-/*global define,document*/
+/*global define,document,WinJS*/
 define('scalejs.mvvm/htmlTemplateSource',[
     'knockout',
     'scalejs!core'
@@ -224,7 +223,13 @@ define('scalejs.mvvm/htmlTemplateSource',[
         // for every child get its templateId and templateHtml 
         // and add it to 'templates'            
         var div = document.createElement('div');
-        div.innerHTML = templatesHtml;
+
+        if (typeof WinJS !== 'undefined') {
+            WinJS.Utilities.setInnerHTMLUnsafe(div, templatesHtml);
+        } else {
+            div.innerHTML = templatesHtml;
+        }
+
         toArray(div.childNodes).forEach(function (childNode) {
             if (childNode.nodeType === 1 && has(childNode, 'id')) {
                 templates[childNode.id] = childNode.innerHTML;
@@ -494,9 +499,13 @@ define('scalejs.mvvm/mvvm',[
     }
 
     function init() {
-        var body = document.getElementsByTagName('body')[0];
+        var body = document.getElementsByTagName('body')[0],
+            opening_comment = document.createComment(' ko class: scalejs-shell '),
+            closing_comment = document.createComment(' /ko ');
 
-        body.innerHTML = '<!-- ko class: scalejs-shell --><!-- /ko -->';
+        body.appendChild(opening_comment);
+        body.appendChild(closing_comment);
+
         registerBindings({
             'scalejs-shell': function (context) {
                 return {
@@ -631,7 +640,7 @@ define('scalejs.bindings/render',[
     var is = core.type.is,
         has = core.object.has,
         unwrap = ko.utils.unwrapObservable,
-        complete = core.functional.builders.complete,
+        continuation = core.functional.builders.continuation,
         $DO = core.functional.builder.$DO;
 
     function init() {
@@ -665,7 +674,7 @@ define('scalejs.bindings/render',[
         if (value) {
             if (is(value.dataClass, 'string')) {
                 // if dataClass is specified then get the binding from the bindingRouter
-                bindingAccessor = ko.bindingProvider.instance.bindingRouter(value.dataClass);
+                bindingAccessor = ko.bindingProvider.instance.bindingRouter(value.dataClass, ko.bindingProvider.instance.bindings);
                 if (!bindingAccessor) {
                     throw new Error('Don\'t know how to render binding "' + value.dataClass +
                                     '" - no such binding registered. ' +
@@ -692,7 +701,7 @@ define('scalejs.bindings/render',[
             inTransitions = binding.transitions.inTransitions.map(function (t) { return $DO(t); });
         }
 
-        render = complete.apply(null, outTransitions.concat($DO(applyBindings)).concat(inTransitions));
+        render = continuation.apply(null, outTransitions.concat($DO(applyBindings)).concat(inTransitions));
 
         context = {
             getElement: function () {
@@ -738,4 +747,5 @@ define('scalejs.mvvm',[
 
     core.registerExtension(mvvm);
 });
+
 
