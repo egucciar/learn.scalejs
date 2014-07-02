@@ -1,23 +1,41 @@
-﻿<div id="bind_layout_template">
-    <div data-class="bind-summary"></div>
-    <div data-class="bind-content"></div>
-</div>
+﻿<div id="bind_template">
+    <div class="bind grid">
+        
+        <div class="bind textbox">
+            <h3>Plain and simple text box</h3>
+            <span class="bind text" data-bind="text: helloWorld"></span> <br />
+            <input data-bind="value: helloWorld, valueUpdate: 'afterkeydown'">                   
+        </div>
 
-<div id="bind_content_template">
-    <div class="bind text" data-class="bind-text"></div>
-    <div data-bind="foreach: items" >
-        <div data-bind="text: $data"></div>
+        <div class="bind list">
+            <h3>Plain and simple list + entry from text box.</h3>
+
+
+            <input data-class="bind-item-input" />
+            <button data-bind="click: submitItem">Submit Item</button>
+
+            <br />
+
+            <div data-bind="foreach: itemsList">
+                <div data-bind="text: $data"></div>
+            </div>
+            <!-- NOTE: $data is a knockout concept!.-->
+        </div>
+
+        <div class="bind multilist">
+           <h3> A multi-select list with Move</h3>
+
+            <select data-bind="options: listA.items, selectedOptions: listA.selectedItems" size="5" multiple="true"></select>
+            <button data-bind="click: move(listA, listB)">Move A to B</button>
+
+            <select data-bind="options: listB.items, selectedOptions: listB.selectedItems" size="5" multiple="true"></select>
+            <button data-bind="click: move(listB, listA)">Move B to A</button>
+        </div>
+
+        <div class="bind formatter">
+            <h3>Formats input as a price</h3>
+
+            <input data-bind="value: formattedPrice" />
+        </div> 
     </div>
-    <input data-bind="value: formattedPrice" />
-    <input data-bind="value: username, valueUpdate: 'afterkeydown', event:{ keyup: onEnterKeyPressed }" />
-    <button data-bind="click: submit">submit</button>
 </div>
-
-<div id="bind_summary_template">
-    <input data-bind="value: selectedItem" />
-    <select data-bind="options: availableItems, selectedOptions: availableItem" size="5" multiple="true"></select>
-    <button data-bind="click: addAvailable">add</button>
-    <select data-bind="options: selectedItems, selectedOptions: selectedItem" size="5" multiple="true"></select>
-    <button data-bind="click: addSelected">remove</button>
-</div>
-

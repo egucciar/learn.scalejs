@@ -21,6 +21,7 @@ define([
             onEntry = sandbox.state.builder.onEntry,
             on = sandbox.state.builder.on,
             gotoInternally = sandbox.state.builder.gotoInternally,
+            getStatechartSpec = sandbox.state.getStatechartSpec,
             parseGridStyles = sandbox.layout.parseGridStyles,
             gridTemplate = sandbox.layout.utils.gridTemplate,
             parallel = sandbox.state.builder.parallel,
@@ -39,6 +40,7 @@ define([
                    // create the code and module regions
                     this.code = viewModel.code;
                     this.module = viewModel.module;
+                    console.log(getStatechartSpec());
                 }),
                // Register main state and main.module state (entry point for app)
                 state('main',

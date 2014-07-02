@@ -532,6 +532,13 @@ define('scalejs.statechart-scion/state',[
             }
         });
 
+        function getStatechartSpec() {
+            return applicationStatechartSpec;
+        }
+
+        function registerListener(listener) {
+            applicationStatechart.registerListener(listener);
+        }
 
         return {
             registerStates: registerStates,
@@ -540,7 +547,9 @@ define('scalejs.statechart-scion/state',[
             raise: raise,
             observe: observe,
             onState: onState,
-            builder: builder
+            builder: builder,
+            getStatechartSpec: getStatechartSpec,
+            registerListener: registerListener
         };
     };
 });

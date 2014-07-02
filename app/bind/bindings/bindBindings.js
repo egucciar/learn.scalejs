@@ -1,9 +1,19 @@
 ﻿/*global define */
 /*jslint sloppy: true*/
 define({
-    'bind-text': function () {
+    'bind-item-input': function () {
+        var data = this;
+
         return {
-            text: "hello " + this.username()
+            value: this.newItem,
+            valueUpdate: 'afterkeydown',
+            event: {
+                keyup: function (data, e) {
+                    if (e.keyCode === 13) {
+                        data.submitItem();
+                    }
+                }
+            }
         };
     },
     'bind-summary': function() {
@@ -21,7 +31,5 @@ define({
                 data: this
             }
         };
-
     }
-
 });

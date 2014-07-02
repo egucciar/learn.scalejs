@@ -13,7 +13,7 @@ define([
 
     return function bindModule() {
         var // imports
-            template = sandbox.mvvm.template,
+            gridTemplate = sandbox.layout.utils.gridTemplate,
             registerStates = sandbox.state.registerStates,
             registerTransition = sandbox.state.registerTransition,
             state = sandbox.state.builder.state,
@@ -27,10 +27,7 @@ define([
         registerStates('main',
             state('bind',
                 onEntry(function () {
-                    // render the bind_template in the module region
-                    //this.module(template("bind_template", bind));
-                    //this.module(template("bind_summary_template", bind));
-                    this.module(template("bind_layout_template", bind));
+                    this.module(gridTemplate("bind_template", bind));
                 })));
 
         // Register self-opening transition

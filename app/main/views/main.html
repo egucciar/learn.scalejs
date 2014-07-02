@@ -76,4 +76,8 @@
     The "code" module also listens for the "open.module" event and loads the module's code in its ViewModel. The code module does not know anything about specific modules,
     and modules do not know (or care) about the existance of the code module. This maintains loose coupling throughout the app....which was done intentionally. :)
 
+
+    <a href="http://live.echo-flow.com/scion-web-simulation-environment/#%3Cscxml%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2005%2F07%2Fscxml%22%3E%0A%20%20%09%3Cparallel%20id%3D%22app%22%3E%0A%20%20%20%20%20%20%3Cstate%20id%3D%22main%22%3E%0A%20%20%20%20%20%20%20%20%20%3Ctransition%20event%3D%22open.module%22%20target%3D%22main.module%22%20cond%3D%22module%20%3D%3D%3D%20'main'%22%20type%3D%22internal%22%3E%3C%2Ftransition%3E%0A%20%20%20%20%20%20%20%20%20%3Ctransition%20event%3D%22open.module%22%20target%3D%22code.module%22%20cond%3D%22module%20%3D%3D%3D%20'code'%22%20%20type%3D%22internal%22%3E%3C%2Ftransition%3E%0A%20%20%20%20%20%20%20%20%20%3Ctransition%20event%3D%22open.module%22%20target%3D%22bind%22%20cond%3D%22module%20%3D%3D%3D%20'bind'%22%20type%3D%22internal%22%3E%3C%2Ftransition%3E%0A%20%20%20%20%20%20%20%20%3Cstate%20id%3D%22main.module%22%3E%3C%2Fstate%3E%0A%20%20%20%20%20%20%20%20%3Cstate%20id%3D%22code.module%22%3E%3C%2Fstate%3E%0A%20%20%20%20%20%20%20%20%3Cstate%20id%3D%22bind%22%3E%3C%2Fstate%3E%0A%20%20%20%20%20%20%3C%2Fstate%3E%0A%20%20%20%20%20%20%3Cstate%20id%3D%22code%22%3E%3C%2Fstate%3E%20%20%20%20%20%20%20%20%0A%20%20%20%20%3C%2Fparallel%3E%0A%3C%2Fscxml%3E">
+    This tool can be used to visualize statecharts. Incidentally, the one linked here is the statechart of this very app
+    </a>
 </div>

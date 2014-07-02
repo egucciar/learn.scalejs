@@ -8,50 +8,70 @@ define([
     'use strict';
 
     return function () {
-        var observable = sandbox.mvvm.observable,
+        var //imports
+            observable = sandbox.mvvm.observable,
             observableArray = sandbox.mvvm.observableArray,
-            formatPrice = sandbox.formatter.formatPrice,
-            items = observableArray(),
-            username = observable(""),
-            price = observable(25.99),
-            formattedPrice = formatPrice(price),
-            availableItems = observableArray(['London', 'Paris', 'Tokyo']),
-            availableItem = observableArray(),
-            selectedItems = observableArray(),
-            selectedItem = observableArray();
+            computed = sandbox.mvvm.computed,
+            //members
+            helloWorld = observable("Hello World!"),
+            itemsList = observableArray(),
+            newItem = observable(),
+            formattedPrice,
+            listA,
+            listB;
 
-        function addAvailable() {
-            var item = availableItem();
-            availableItems.removeAll(item);
-            selectedItems(selectedItems().concat(item));
-        }
-        function addSelected() {
-            var item = selectedItem();
-            selectedItems(availableItems().concat(item));
-            selectedItems.removeAll(item);
-        }
-        function submit() {
-            items.push(username());
+        // define functions at the top
+
+        function submitItem() {
+            itemsList.push(newItem());
         }
 
-        function onEnterKeyPressed(data,event) {
-            if (event.keyCode === 13 ) {
-                submit();
-            }
+        function selectableItemsViewModel(initialItems) {
+            return {
+                items: observableArray(initialItems),
+                selectedItems: observableArray()
+            };
         }
+
+        function move(source, target) {
+            return function () {
+                var selectedItems = source.selectedItems();
+                source.items.removeAll(selectedItems);
+                target.items(target.items().concat(selectedItems));
+            };
+        }
+
+        function createFormattedPrice(initialValue) {
+            var price = observable(initialValue);
+
+            return computed({
+                read: function () {
+                    return '$' + price().toFixed(2)
+                },
+                write: function (value) {
+                    value = parseFloat(value.replace(/[^\.\d]/g, ""));
+                    price(isNaN(value) ? 0 : value);
+                }
+            });
+        }
+
+        listA = selectableItemsViewModel();
+        listB = selectableItemsViewModel(['London', 'Paris', 'France']);
+
+        // updates listA.items with the items in itemsList
+        itemsList.subscribe(listA.items);
+
+        formattedPrice = createFormattedPrice(20.00);
 
         return {
-            username: username,
-            items: items,
-            formattedPrice: formattedPrice,
-            submit: submit,
-            onEnterKeyPressed: onEnterKeyPressed,
-            selectedItem: selectedItem,
-            selectedItems: selectedItems,
-            availableItems: availableItems,
-            availableItem: availableItem,
-            addAvailable: addAvailable,
-            addSelected: addSelected
+            helloWorld: helloWorld,
+            itemsList: itemsList,
+            newItem: newItem,
+            submitItem: submitItem,
+            listA: listA,
+            listB: listB,
+            move: move,
+            formattedPrice: formattedPrice
         };
     };
 });
